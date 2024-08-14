@@ -4,6 +4,7 @@ function Track() {
     return(
         <div>
             <MyNavbar/>
+            <h1>Animal tracking</h1>
         </div>
     )
 }
