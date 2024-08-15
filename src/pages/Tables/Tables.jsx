@@ -7,7 +7,7 @@ import { Container } from 'react-bootstrap';
 function Tables() {
   const [sensorData, setSensorData] = useState({});
   const databaseSecret = import.meta.env.VITE_YOUR_DATABASE_SECRET
-  const url = `https://smart-agriculture-27cf2-default-rtdb.firebaseio.com/sensors.json?auth=${databaseSecret}`
+  const url = `https://smart-agriculture-27cf2-default-rtdb.firebaseio.com/sensors-data.json?auth=${databaseSecret}`
 
 
 
@@ -15,6 +15,7 @@ function Tables() {
     const fetchData = async () => {
       try {
         const response = await axios.get(url);
+        console.log(response.data)
         setSensorData(response.data)
       } catch (error) {
         console.error('Error fetching sensor data:', error);
