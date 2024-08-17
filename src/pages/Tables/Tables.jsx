@@ -1,8 +1,8 @@
-
 import { useState, useEffect } from 'react';
 import MyNavbar from '../../components/MyNavbar/MyNavbar';
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
+import SensorDataTable from '../../components/SensorDataTable/SensorDataTable';
 
 function Tables() {
   const [sensorData, setSensorData] = useState({});
@@ -15,7 +15,8 @@ function Tables() {
     const fetchData = async () => {
       try {
         const response = await axios.get(url);
-        console.log(response.data)
+        const data = response.data.friday
+        console.log(data)
         setSensorData(response.data)
       } catch (error) {
         console.error('Error fetching sensor data:', error);
@@ -25,26 +26,20 @@ function Tables() {
     fetchData();
   }, []);
 
+  const timestamps = ['12:00 AM', '01:00 AM', '02:00 AM', '03:00 AM', '04:00 AM', '05:00 AM'];
+  const sensorDataByTime = [ // More descriptive than timeStampss
+    { '12:00 AM': { humidity: 23, rainStatus: 1, soilMoisture: 25, phLevel: 7.2, temperature: 28 } },
+    { '01:00 AM': { humidity: 25, rainStatus: 0, soilMoisture: 23, phLevel: 7.1, temperature: 26 } },
+    // ... Add more data objects
+  ];
+
 
   return (
     <div>
       <MyNavbar />
       <Container>
-      <h1>Smart Agriculture Dashboard</h1>
-      <p>Real-time data from your sensors</p>
-
-      {/* Display sensor data here */}
-      {Object.keys(sensorData).length > 0 ? (
-        <div>
-          {/* Render sensor data using appropriate components or formatting */}
-          {/* Example: */}
-          <p>Temperature: {sensorData.temperature}</p>
-          <p>Humidity: {sensorData.humidity}</p>
-          {/* ... other sensor data */}
-        </div>
-      ) : (
-        <p>Loading sensor data...</p>
-      )}
+      <h1>Smart Agriculture Data in Daywise</h1>
+      <SensorDataTable timestamps={timestamps} sensorDataByTime={sensorDataByTime}/>
       </Container>
     </div>
   );
