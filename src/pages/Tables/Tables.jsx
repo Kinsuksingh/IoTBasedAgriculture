@@ -10,58 +10,34 @@ function Tables() {
   const url = `https://smart-agriculture-27cf2-default-rtdb.firebaseio.com/sensors-data.json?auth=${databaseSecret}`
 
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(url);
-        const data = response.data.friday
-        console.log(data)
         setSensorData(response.data)
       } catch (error) {
         console.error('Error fetching sensor data:', error);
       }
     };
-
     fetchData();
-  }, []);
-
-  const timestamps = ['12:00 AM', '01:00 AM', '02:00 AM', '03:00 AM', '04:00 AM', '05:00 AM'];
-  const sensorDataByTime = [ // More descriptive than timeStampss
-    { '12:00 AM': { humidity: 23, rainStatus: 1, soilMoisture: 25, phLevel: 7.2, temperature: 28 } },
-    { '01:00 AM': { humidity: 25, rainStatus: 0, soilMoisture: 23, phLevel: 7.1, temperature: 26 } },
-    // ... Add more data objects
-  ];
+  }, [url]);
 
 
-  const sensorDataWithDateAndTime = [
-    { '12:00 AM': { humidity: 23, rainStatus: 1, soilMoisture: 25, phLevel: 7.2, temperature: 28 } },
-    { '01:00 AM': { humidity: 25, rainStatus: 0, soilMoisture: 23, phLevel: 7.1, temperature: 26 } },
-    // ... Add more data objects
-];
+  const standardizedData = [
+  {id:1,date: '2024-01-01', time: '12:00 AM', humidity: 23, rainStatus: 1, soilMoisture: 25,phLevel: 7.2, temperature: 28}, 
+  {id:2,date: '2024-01-01', time: '01:00 AM', humidity: 25, rainStatus: 0, soilMoisture: 23,phLevel: 7.1, temperature: 26}
+  ]
 
-const dummyDate = '2024-01-01'; // Replace with desired date
-
-const correctedData = sensorDataWithDateAndTime.map(dataPoint => {
-    const time = Object.keys(dataPoint)[0]; // Extract time
-    const values = dataPoint[time]; // Extract values
-
-    return {
-        date: dummyDate,
-        time,
-        ...values
-    };
-});
-
-console.log(correctedData);
-
+// Example usage:
+const standardizedDatas = Object.values(sensorData);
+console.log(standardizedDatas);
 
   return (
     <div>
       <MyNavbar />
       <Container>
       <h1>Datewise Agriculture Data</h1>
-      <SensorDataTable correctedData={correctedData} timestamps={timestamps} sensorDataByTime={sensorDataByTime}/>
+      <SensorDataTable standardizedData={standardizedData}/>
       </Container>
     </div>
   );
