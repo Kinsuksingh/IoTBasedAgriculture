@@ -6,13 +6,13 @@ function SensorDataTable({standardizedData}) {
     standardizedData: PropTypes.arrayOf(PropTypes.object).isRequired,
   };
   
-  const sensorCategories = ['Date','Time Stamp', 'Temperature °C','Humidity %', 'Soil Moisture', 'Ph Levels', 'Rain Status'];
+  const sensorCategories = ['Day','Reading Count', 'Temperature °C','Humidity %', 'Soil Moisture', 'Ph Levels', 'Rain Status'];
 
   const getSensorDataForTime = (sensordata) => {
     return (
       <tr key={sensordata.id} className='text-center'>
-        <td>{sensordata.date}</td>
-        <td>{sensordata.time}</td>
+        <td>{sensordata.day}</td>
+        <td>{sensordata.readingCount}</td>
         <td>{sensordata.temperature}</td>
         <td>{sensordata.humidity}</td>
         <td>{sensordata.soilMoisture}</td>

@@ -9,6 +9,10 @@ function Tables() {
   const databaseSecret = import.meta.env.VITE_YOUR_DATABASE_SECRET
   const url = `https://smart-agriculture-27cf2-default-rtdb.firebaseio.com/sensors-data.json?auth=${databaseSecret}`
 
+  const standardizedData = [
+    {id:1,day: '2024-01-01', readingCount: '12:00 AM', humidity: 23, rainStatus: 1, soilMoisture: 25,phLevel: 7.2, temperature: 28}, 
+    {id:2,day: '2024-01-01', readingCount: '01:00 AM', humidity: 25, rainStatus: 0, soilMoisture: 23,phLevel: 7.1, temperature: 26}
+    ]
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,20 +27,17 @@ function Tables() {
   }, [url]);
 
 
-  const standardizedData = [
-  {id:1,date: '2024-01-01', time: '12:00 AM', humidity: 23, rainStatus: 1, soilMoisture: 25,phLevel: 7.2, temperature: 28}, 
-  {id:2,date: '2024-01-01', time: '01:00 AM', humidity: 25, rainStatus: 0, soilMoisture: 23,phLevel: 7.1, temperature: 26}
-  ]
+  
 
 // Example usage:
-const standardizedDatas = Object.values(sensorData);
-console.log(standardizedDatas);
+// const standardizedDatas = Object.values(sensorData);
+
 
   return (
     <div>
       <MyNavbar />
       <Container>
-      <h1>Datewise Agriculture Data</h1>
+      <h1>Daywise Agriculture Data</h1>
       <SensorDataTable standardizedData={standardizedData}/>
       </Container>
     </div>
