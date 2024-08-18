@@ -15,6 +15,7 @@ function SensorDataTable({timestamps=[],sensorDataByTime=[]}) {
 
     return (
       <tr key={timestamp} className='text-center'>
+        <td>date</td>
         <td>{timestamp}</td>
         <td>{sensorData[timestamp].humidity}</td>
         <td>{sensorData[timestamp].rainStatus}</td>
@@ -30,6 +31,7 @@ function SensorDataTable({timestamps=[],sensorDataByTime=[]}) {
     <Table responsive>
       <thead>
         <tr className='text-center'>
+          <th>Date</th>
           <th>Time Stamp</th>
           {sensorCategories.map((sensor) => (
             <th key={sensor}>{sensor}</th>

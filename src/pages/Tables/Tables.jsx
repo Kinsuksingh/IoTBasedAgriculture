@@ -34,12 +34,34 @@ function Tables() {
   ];
 
 
+  const sensorDataWithDateAndTime = [
+    { '12:00 AM': { humidity: 23, rainStatus: 1, soilMoisture: 25, phLevel: 7.2, temperature: 28 } },
+    { '01:00 AM': { humidity: 25, rainStatus: 0, soilMoisture: 23, phLevel: 7.1, temperature: 26 } },
+    // ... Add more data objects
+];
+
+const dummyDate = '2024-01-01'; // Replace with desired date
+
+const correctedData = sensorDataWithDateAndTime.map(dataPoint => {
+    const time = Object.keys(dataPoint)[0]; // Extract time
+    const values = dataPoint[time]; // Extract values
+
+    return {
+        date: dummyDate,
+        time,
+        ...values
+    };
+});
+
+console.log(correctedData);
+
+
   return (
     <div>
       <MyNavbar />
       <Container>
-      <h1>Smart Agriculture Data in Daywise</h1>
-      <SensorDataTable timestamps={timestamps} sensorDataByTime={sensorDataByTime}/>
+      <h1>Datewise Agriculture Data</h1>
+      <SensorDataTable correctedData={correctedData} timestamps={timestamps} sensorDataByTime={sensorDataByTime}/>
       </Container>
     </div>
   );
